@@ -61,8 +61,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 	private final PageListener pageListener = new PageListener();
 	public OnPageChangeListener delegatePageListener;
-    private OnTabClickListener mOnTabclickListener;
-    private OnTabLongClickListener mOnTabLongClickListener;
+    private OnTabClickListener onTabClickListener;
+    private OnTabLongClickListener onTabLongClickListener;
 
 	private LinearLayout tabsContainer;
 	private ViewPager pager;
@@ -188,6 +188,14 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		this.delegatePageListener = listener;
 	}
 
+    public void setOnTabClickListener(OnTabClickListener listener) {
+        this.onTabClickListener = listener;
+    }
+
+    public void setOnTabLongClickListener(OnTabLongClickListener listener) {
+        this.onTabLongClickListener = listener;
+    }
+
 	public void notifyDataSetChanged() {
 
 		tabsContainer.removeAllViews();
@@ -259,8 +267,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         tab.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mOnTabclickListener != null) {
-                    mOnTabclickListener.onTabClick(v, position);
+                if (onTabClickListener != null) {
+                    onTabClickListener.onTabClick(v, position);
                 }
             }
         });
@@ -268,7 +276,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         tab.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                return mOnTabLongClickListener != null && mOnTabLongClickListener.onTabLongClick(v, position);
+                return onTabLongClickListener != null && onTabLongClickListener.onTabLongClick(v, position);
             }
         });
 
