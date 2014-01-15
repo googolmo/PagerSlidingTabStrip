@@ -61,6 +61,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 	private final PageListener pageListener = new PageListener();
 	public OnPageChangeListener delegatePageListener;
+    private OnTabClickListener mOnTabclickListener;
+    private OnTabLongClickListener mOnTabLongClickListener;
 
 	private LinearLayout tabsContainer;
 	private ViewPager pager;
@@ -253,6 +255,23 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		});
 
 		tab.setPadding(tabPadding, 0, tabPadding, 0);
+
+        tab.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnTabclickListener != null) {
+                    mOnTabclickListener.onTabClick(v, position);
+                }
+            }
+        });
+
+        tab.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return mOnTabLongClickListener != null && mOnTabLongClickListener.onTabLongClick(v, position);
+            }
+        });
+
 		tabsContainer.addView(tab, position, shouldExpand ? expandedTabLayoutParams : defaultTabLayoutParams);
 	}
 
@@ -386,6 +405,14 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		}
 
 	}
+
+    public interface OnTabClickListener {
+        void onTabClick(View view, int position);
+    }
+
+    public interface OnTabLongClickListener {
+        boolean onTabLongClick(View view, int position);
+    }
 
 	public void setIndicatorColor(int indicatorColor) {
 		this.indicatorColor = indicatorColor;
