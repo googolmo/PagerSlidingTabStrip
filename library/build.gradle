@@ -22,4 +22,4 @@ android {
     }
 }
 
-apply from: 'http://code.dapps.douban.com/wangmoyang/buildscript/raw/master/gradle-mvn-push.gradle'
+apply from: 'http://code.dapps.douban.com/GradleBuild/raw/master/gradle-mvn-push.gradle'
