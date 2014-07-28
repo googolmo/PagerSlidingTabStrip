@@ -18,11 +18,13 @@ package com.astuetz;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -48,6 +50,14 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	public interface IconTabProvider {
 		public int getPageIconResId(int position);
 	}
+
+    public interface DrawableTabProvider {
+        public Drawable getPageDrawable(int position);
+    }
+
+    public interface ViewTabProvider {
+        public View getPageView(int position);
+    }
 
 	// @formatter:off
 	private static final int[] ATTRS = new int[] {
@@ -206,7 +216,11 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 			if (pager.getAdapter() instanceof IconTabProvider) {
 				addIconTab(i, ((IconTabProvider) pager.getAdapter()).getPageIconResId(i));
-			} else {
+			} else if (pager.getAdapter() instanceof DrawableTabProvider) {
+                addIconTab(i, ((DrawableTabProvider) pager.getAdapter()).getPageDrawable(i));
+            } else if (pager.getAdapter() instanceof ViewTabProvider) {
+                addTab(i, ((ViewTabProvider) pager.getAdapter()).getPageView(i));
+            } else {
 				addTextTab(i, pager.getAdapter().getPageTitle(i).toString());
 			}
 
@@ -234,7 +248,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 	}
 
-	private void addTextTab(final int position, String title) {
+	private void addTextTab(final int position, CharSequence title) {
 
 		TextView tab = new TextView(getContext());
 		tab.setText(title);
@@ -252,6 +266,13 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		addTab(position, tab);
 
 	}
+
+    private void addIconTab(final int position, Drawable drawable) {
+        ImageButton tab = new ImageButton(getContext());
+        tab.setImageDrawable(drawable);
+
+        addTab(position, tab);
+    }
 
 	private void addTab(final int position, View tab) {
 		tab.setFocusable(true);
@@ -276,6 +297,10 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 		tabsContainer.addView(tab, position, shouldExpand ? expandedTabLayoutParams : defaultTabLayoutParams);
 	}
+
+    public View getTabView(int position) {
+        return tabsContainer.getChildAt(position);
+    }
 
 	private void updateTabStyles() {
 
@@ -379,7 +404,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 			currentPosition = position;
 			currentPositionOffset = positionOffset;
 
-			scrollToChild(position, (int) (positionOffset * tabsContainer.getChildAt(position).getWidth()));
+			scrollToChild(position, tabCount > 0 ? (int) (positionOffset * tabsContainer.getChildAt(position).getWidth()) : 0);
 
 			invalidate();
 
