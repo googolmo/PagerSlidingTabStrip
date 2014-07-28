@@ -1,4 +1,4 @@
-# Android PagerSlidingTabStrip
+# Android PagerSlidingTabStrip (Fork from [PagerSlidingTabStrip](https://github.com/astuetz/PagerSlidingTabStrip))
 
 Interactive paging indicator widget, compatible with the `ViewPager` from the 
 Android Support Library. 
@@ -14,13 +14,13 @@ Try out the sample application [on the Play Store](https://play.google.com/store
   1. Include the library as local library project or add the dependency in your build.gradle.
         
         dependencies {
-            compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+            compile 'im.amomo.widget:tabstrip:1.1.0'
         }
 
   2. Include the PagerSlidingTabStrip widget in your layout. This should usually be placed
      above the `ViewPager` it represents.
 
-        <com.astuetz.PagerSlidingTabStrip
+        <im.amomo.widget.tabstrip.PagerSlidingTabStrip
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="48dip" />
@@ -61,9 +61,16 @@ your brand:
 
 *All attributes have their respective getters and setters to change them at runtime*
 
-# Changelog
+# ChangeLog
 
-### Current Version: 1.0.1
+### Current Version: 1.1.0
+
+ * fork from Parent Project
+ * add TabDrawableProvider TabViewProvider
+ * add OnTabClickListener
+ * upgrade gradle build files
+ * fix bug
+
 
 ### [1.0.1](https://github.com/astuetz/PagerSlidingTabStrip/tree/v1.0.1)
 
@@ -75,12 +82,7 @@ your brand:
 # Developed By
 
  * Andreas Stuetz - <andreas.stuetz@gmail.com>
-
-
-### Credits
-
- * [Kirill Grouchnikov](https://plus.google.com/108761828584265913206/posts) - Author of [an explanation post on Google+](https://plus.google.com/108761828584265913206/posts/Cwk7joBV3AC)
-
+ * Momo Wang - <googolmo at gmail.com>
 
 # License
 
