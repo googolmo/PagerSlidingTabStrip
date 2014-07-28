@@ -1,4 +1,4 @@
-package com.astuetz.viewpager.extensions.sample;
+package im.amomo.widget.tabstrip.sample;
 
 import android.graphics.Point;
 import android.os.Build;
@@ -15,8 +15,10 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.astuetz.PagerSlidingTabStrip;
-import com.astuetz.PagerSlidingTabStrip.IconTabProvider;
+import im.amomo.widget.tabstrip.sample.R;
+
+import im.amomo.widget.tabstrip.PagerSlidingTabStrip;
+
 
 public class QuickContactFragment extends DialogFragment {
 
@@ -80,7 +82,8 @@ public class QuickContactFragment extends DialogFragment {
 		}
 	}
 
-	public class ContactPagerAdapter extends PagerAdapter implements IconTabProvider {
+	public class ContactPagerAdapter extends PagerAdapter implements
+            PagerSlidingTabStrip.IconTabProvider {
 
 		private final int[] ICONS = { R.drawable.ic_launcher_gplus, R.drawable.ic_launcher_gmail,
 				R.drawable.ic_launcher_gmaps, R.drawable.ic_launcher_chrome };

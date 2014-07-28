@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.astuetz.viewpager.extensions.sample;
+package im.amomo.widget.tabstrip.sample;
 
 import android.annotation.TargetApi;
 import android.graphics.Color;
@@ -35,7 +35,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.astuetz.PagerSlidingTabStrip;
+import im.amomo.widget.tabstrip.sample.R;
+
+import im.amomo.widget.tabstrip.PagerSlidingTabStrip;
+
 
 public class MainActivity extends FragmentActivity {
 

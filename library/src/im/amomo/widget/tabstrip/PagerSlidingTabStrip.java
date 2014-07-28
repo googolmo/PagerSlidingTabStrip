@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package com.astuetz;
+package im.amomo.widget.tabstrip;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -41,9 +40,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.Locale;
+import im.amomo.widget.tabstrip.R;
 
-import com.astuetz.pagerslidingtabstrip.R;
+import java.util.Locale;
 
 public class PagerSlidingTabStrip extends HorizontalScrollView {
 
@@ -616,7 +615,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 			dest.writeInt(currentPosition);
 		}
 
-		public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
+		public static final Creator<SavedState> CREATOR = new Creator<SavedState>() {
 			@Override
 			public SavedState createFromParcel(Parcel in) {
 				return new SavedState(in);
